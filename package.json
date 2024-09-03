@@ -1,0 +1,60 @@
+{
+  "name": "rs-analytics",
+  "version": "1.0.0",
+  "description": "Requirements Smells Analytics",
+  "productName": "RS Analytics",
+  "author": "Mayra Castillo <mayracastillo@unicauca.edu.co>",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ext .js,.ts,.vue ./",
+    "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
+    "test": "echo \"No test specified\" && exit 0",
+    "dev": "quasar dev",
+    "build": "quasar build",
+    "build-sit": "ENV_FILE=sit quasar build",
+    "build-qa": "ENV_FILE=qa quasar build",
+    "build-prod": "ENV_FILE=prod quasar build"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.16.4",
+    "axios": "^1.2.1",
+    "core-js": "^3.6.5",
+    "dotenv": "^16.3.1",
+    "moment": "^2.29.4",
+    "papaparse": "^5.4.1",
+    "pdfjs-dist": "^4.0.379",
+    "pinia": "^2.0.11",
+    "quasar": "^2.6.0",
+    "vee-validate": "^4.5.8",
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0"
+  },
+  "devDependencies": {
+    "@quasar/app-webpack": "^3.0.0",
+    "@quasar/quasar-app-extension-qpdfviewer": "^2.0.0-alpha.6",
+    "@types/papaparse": "^5.3.14",
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "eslint": "^8.10.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-vue": "^9.0.0",
+    "file-loader": "^6.2.0",
+    "prettier": "^2.5.1"
+  },
+  "browserslist": [
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "last 4 Edge versions",
+    "last 7 Safari versions",
+    "last 8 Android versions",
+    "last 8 ChromeAndroid versions",
+    "last 8 FirefoxAndroid versions",
+    "last 10 iOS versions",
+    "last 5 Opera versions"
+  ],
+  "engines": {
+    "node": ">= 12.22.1",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
+}

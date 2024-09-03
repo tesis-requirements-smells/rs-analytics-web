@@ -1,0 +1,10 @@
+Instrucciones para Completar la Plantilla de Historias de Usuario
+1. Nombre de Historia de Usuario: El nombre breve de la historia de usuario. Ejemplo: 'Registro de Usuario'.
+2. Descripción de Historia de Usuario: Una descripción detallada de la historia de usuario, que debe seguir el formato 'Como [rol], quiero [acción] para [beneficio]'. Ejemplo: 'Como cliente nuevo, quiero poder registrarme en la aplicación de manera fácil y rápida para empezar a usarla sin complicaciones.'
+
+====================================================================================================
+========================================== EJEMPLO DE USO ==========================================
+====================================================================================================
+Nombre de Historia de Usuario|Descripción de Historia de Usuario
+Registro de Usuario|Como cliente nuevo, quiero poder registrarme en la aplicación de manera fácil y rápida para empezar a usarla sin complicaciones.
+Inicio de Sesión|Como usuario registrado, quiero poder iniciar sesión rápidamente para acceder a mi cuenta y realizar pedidos de manera eficiente.

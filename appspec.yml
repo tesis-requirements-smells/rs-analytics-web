@@ -1,0 +1,76 @@
+version: 0.0
+os: linux
+# Which files from your application revision should be installed on the instance during the deployment's Install event
+files:
+  # Multiple source and destination pairs can be set.
+  # If source refers to a file, only the specified files are copied to the instance
+  # If source refers to a directory, then all files in the directory are copied to the instance.
+  # If source is a single slash ("/" for Amazon Linux, RHEL, and Ubuntu Server instances, or "\" for Windows Server
+  # instances), then all of the files from your revision are copied to the instance.
+  # The paths used in source are relative to the appspec.yml file, which should be at the root of your revision
+  # The destination instruction identifies the location on the instance where the files should be copied. This must be a
+  # fully qualified path such as /root/destination/directory (on Linux, RHEL, and Ubuntu) or c:\destination\folder
+  # (on Windows).
+  - source: /
+    destination: /ast02/sda/despliegues/config/portal
+# file_exists_behavior - Optional: DISALLOW|OVERWRITE|RETAIN
+# The file_exists_behavior instruction is optional, and specifies how CodeDeploy handles files that already exist in a
+# deployment target location but weren't part of the previous successful deployment
+file_exists_behavior: OVERWRITE
+permissions:
+  # object – Required. This is a set of file system objects (files or directories/folders) that the specified permissions
+  # are applied to after the file system objects are copied to the instance. string
+  - object: /
+    # pattern – Optional. Specifies a pattern to apply permissions. If not specified or specified with the special
+    # characters "**", the permissions are applied to all matching files or directories, depending on the type. Specify
+    # pattern with a string with quotation marks ("").
+    pattern: "**"
+    # owner – Optional. The name of the owner of object. If not specified, all existing owners applied to the original file
+    # or directory/folder structure remain unchanged after the copy operation. string
+    owner: sda
+    # group – Optional. The name of the group for object. If not specified, all existing groups applied to the original
+    # file or directory/folder structure remain unchanged after the copy operation. string
+    group: sda
+    # mode – Optional. A numeric value specifying the permissions to be applied to object. Use chmod convention (Ex. 600)
+    # If the value includes a leading zero, you must surround it with double-quotes, or remove the leading zero so that
+    # only three digits remain.
+    mode: 764
+# acls – Optional. A list of character strings representing one or more access control list (ACL) entries applied to object
+#    acls:
+# context – Optional. For Security-Enhanced Linux (SELinux)-enabled instances, a list of security-relevant context
+# labels to apply to the copied objects. Labels are specified as keys containing user, type, and range.
+# (For more information, see the SELinux documentation.) Each key is entered with a string
+#    context:
+#      user|type|range: valor
+# type – Optional. The types of objects to which to apply the specified permissions. type is a string that can be set
+# to file or directory. If file is specified, the permissions are applied only to files that are immediately contained
+# in object after the copy operation (and not to object itself). If directory is specified, the permissions are
+# recursively applied to all directories/folders that are anywhere in object after the copy operation (but not to
+# object itself).
+#    type:
+#      - file|directory
+hooks:
+  # A tener en cuenta al usar el atributo "location" de los hooks:
+  #   * NO se pueden enviar parámetros. Ej. - location: mi_script.sh parametro parametro
+  #   * Los scripts NO se ejecutan desde la ubicación definida en la sección files/destination, sino desde una ruta creada
+  #   * dinámicamente por el agente de CodeDeploy debajo de /opt/codedeploy-agent/deployment-root en la máquina EC2 objetivo
+  #  BeforeInstall:
+  #    - location: scripts/install_dependencies.sh
+  #      timeout: 300
+  #      runas: root
+  #  AfterInstall:
+  #    - location: scripts/change_permissions.sh
+  #      timeout: 300
+  #      runas: root
+  ApplicationStart:
+    - location: linux_start_portal.sh
+      timeout: 300
+      runas: sda
+  ApplicationStop:
+    - location: linux_stop_portal.sh
+      timeout: 300
+      runas: sda
+#  ValidateService:
+#    - location: scripts/stop_server.sh
+#        timeout: 300
+#        runas: root
